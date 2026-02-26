@@ -1,0 +1,132 @@
+### REST API — примеры запросов
+### Совместимо с: JetBrains HTTP Client, VS Code REST Client
+
+@baseUrl = http://localhost:8080
+@contentType = application/json
+
+# =============================================================
+# Health Check
+# =============================================================
+
+### Проверка состояния сервиса
+GET {{baseUrl}}/health
+Accept: application/json
+
+# =============================================================
+# Users — создание
+# =============================================================
+
+### Создать пользователя #1
+POST {{baseUrl}}/api/v1/users
+Content-Type: {{contentType}}
+
+{
+  "name": "Иван Иванов",
+  "email": "ivan@example.com"
+}
+
+### Создать пользователя #2
+POST {{baseUrl}}/api/v1/users
+Content-Type: {{contentType}}
+
+{
+  "name": "Мария Петрова",
+  "email": "maria@example.com"
+}
+
+### Создать пользователя #3
+POST {{baseUrl}}/api/v1/users
+Content-Type: {{contentType}}
+
+{
+  "name": "Алексей Сидоров",
+  "email": "alexey@example.com"
+}
+
+### Создать пользователя — ошибка: нет email (422)
+POST {{baseUrl}}/api/v1/users
+Content-Type: {{contentType}}
+
+{
+  "name": "Без Email"
+}
+
+### Создать пользователя — ошибка: невалидный email (422)
+POST {{baseUrl}}/api/v1/users
+Content-Type: {{contentType}}
+
+{
+  "name": "Плохой Email",
+  "email": "not-an-email"
+}
+
+### Создать пользователя — ошибка: невалидный JSON (400)
+POST {{baseUrl}}/api/v1/users
+Content-Type: {{contentType}}
+
+{ bad json }
+
+# =============================================================
+# Users — получение
+# =============================================================
+
+### Получить всех пользователей
+GET {{baseUrl}}/api/v1/users
+Accept: application/json
+
+### Получить пользователя по ID = 1
+GET {{baseUrl}}/api/v1/users/1
+Accept: application/json
+
+### Получить пользователя по ID = 2
+GET {{baseUrl}}/api/v1/users/2
+Accept: application/json
+
+### Получить пользователя — ошибка: не найден (404)
+GET {{baseUrl}}/api/v1/users/99999
+Accept: application/json
+
+### Получить пользователя — ошибка: невалидный ID (400)
+GET {{baseUrl}}/api/v1/users/abc
+Accept: application/json
+
+# =============================================================
+# Users — обновление
+# =============================================================
+
+### Обновить пользователя с ID = 1
+PUT {{baseUrl}}/api/v1/users/1
+Content-Type: {{contentType}}
+
+{
+  "name": "Иван Обновлённый",
+  "email": "ivan.updated@example.com"
+}
+
+### Обновить пользователя — ошибка: не найден (404)
+PUT {{baseUrl}}/api/v1/users/99999
+Content-Type: {{contentType}}
+
+{
+  "name": "Никто",
+  "email": "nobody@example.com"
+}
+
+### Обновить пользователя — ошибка: нет имени (422)
+PUT {{baseUrl}}/api/v1/users/1
+Content-Type: {{contentType}}
+
+{
+  "name": "",
+  "email": "ivan@example.com"
+}
+
+# =============================================================
+# Users — удаление
+# =============================================================
+
+### Удалить пользователя с ID = 3
+DELETE {{baseUrl}}/api/v1/users/3
+
+### Удалить пользователя — ошибка: не найден (404)
+DELETE {{baseUrl}}/api/v1/users/99999

@@ -183,6 +183,20 @@ Base URL: `http://localhost:8080/api/v1`
 
 ## Примеры запросов
 
+### HTTP-клиент файл (`api/requests.http`)
+
+В директории `api/` находится файл `requests.http` с готовыми примерами всех запросов.
+Он поддерживается напрямую в:
+
+- **JetBrains IDE** (IntelliJ IDEA, GoLand, WebStorm и др.) — встроенный HTTP Client
+- **VS Code** — расширение [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
+
+Для запуска откройте `api/requests.http` в IDE и нажмите кнопку ▶ рядом с нужным запросом.
+
+---
+
+### Примеры через curl
+
 ### Проверить здоровье сервиса
 
 ```bash
